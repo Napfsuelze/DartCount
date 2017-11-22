@@ -2,12 +2,12 @@ package Controller;
 
 import Model.Model;
 import Model.Player;
-import View.GameSettingView;
+import View.setting.GameSettingView;
 import View.GameView;
 import View.MenuView;
 import View.PlayerView;
-import View.SettingSelectionView;
-import View.SettingView;
+import View.setting.SettingSelectionView;
+import View.setting.SettingView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -44,7 +44,7 @@ public class Controller {
 			public void handle(ActionEvent arg0) {
 				model.startDartGame();
 				showGameView();
-				//TODO: View anzeigen, dass Spieler aktiv sein müssen
+				//TODO: View anzeigen, dass Spieler aktiv sein mï¿½ssen
 			}
 		});
 		
@@ -138,7 +138,7 @@ public class Controller {
 
 			@Override
 			public void handle(ActionEvent event) {
-				// TODO Bestätigung -> Wollen Sie wirklich das aktuelle Spiel beenden?
+				// TODO Bestï¿½tigung -> Wollen Sie wirklich das aktuelle Spiel beenden?
 				showStartView();
 				model.closeActualGame();
 			}
@@ -147,11 +147,7 @@ public class Controller {
 	}
 	
 	public void showStartView() {
-		double x = primaryStage.getWidth();
-		double y = primaryStage.getHeight();
 		primaryStage.setScene(menuView.getScene());
-		primaryStage.setWidth(x);
-		primaryStage.setHeight(y);
 		primaryStage.setTitle("Count your Darts");
 	}
 	
@@ -191,7 +187,7 @@ public class Controller {
 			model.rotatePlayer();
 			return false;
 		}
-		//TODO Extra View*Gratulation*Restart*Zurück zum Neu*
+		//TODO Extra View*Gratulation*Restart*Zurï¿½ck zum Neu*
 		model.closeActualGame();
 		showStartView();
 		return true;
