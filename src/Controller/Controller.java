@@ -2,11 +2,11 @@ package Controller;
 
 import Model.Model;
 import Model.Player;
+import View.setting.AudioSettingView;
 import View.setting.GameSettingView;
 import View.GameView;
 import View.MenuView;
 import View.PlayerView;
-import View.setting.SettingSelectionView;
 import View.setting.SettingView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,17 +18,17 @@ public class Controller {
 	private PlayerView playerView;
 	private Stage primaryStage;
 	private SettingView settingView;
-	private SettingSelectionView settingSelectionView;
 	private GameSettingView gameSettingView;
+	private AudioSettingView audioSettingView;
 	private GameView gameView;
 	
 	public Controller(Stage primaryStage) {
 		this.model = new Model();
 		this.menuView = new MenuView(model);
 		this.playerView = new PlayerView(model);
-		this.settingView = new SettingView(model);
-		this.settingSelectionView = new SettingSelectionView(model, this);
+		this.settingView = new SettingView(model, this);
 		this.gameSettingView = new GameSettingView(model, this);
+		this.audioSettingView = new AudioSettingView(model, this);
 		this.gameView = new GameView(model, this);
 		model.addObserver(gameView);
 		this.primaryStage = primaryStage;
@@ -62,7 +62,8 @@ public class Controller {
 
 			@Override
 			public void handle(ActionEvent event) {
-				showSettingSelectionView();
+				showSettingView();
+				System.out.println("Gedrückt");
 			}
 
 			
@@ -89,38 +90,11 @@ public class Controller {
 			
 		});
 		
-		settingSelectionView.addBackListener(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				showStartView();
-			}
-			
-		});
-		
-		settingSelectionView.addGameListener(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				showGameSettingView();
-			}
-			
-		});
-		
 		settingView.setBackListener(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
 				showStartView();
-			}
-			
-		});
-		
-		gameSettingView.addBackListener(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				showSettingSelectionView();
 			}
 			
 		});
@@ -138,7 +112,7 @@ public class Controller {
 
 			@Override
 			public void handle(ActionEvent event) {
-				// TODO Best�tigung -> Wollen Sie wirklich das aktuelle Spiel beenden?
+				// TODO Bestätigung -> Wollen Sie wirklich das aktuelle Spiel beenden?
 				showStartView();
 				model.closeActualGame();
 			}
@@ -161,10 +135,10 @@ public class Controller {
 		primaryStage.setTitle("Count your Darts - Setting");
 	}
 	
-	public void showSettingSelectionView() {
+	/*public void showSettingSelectionView() {
 		primaryStage.setScene(settingSelectionView.getScene());
 		primaryStage.setTitle("Count your Darts - Settings");
-	}
+	}*/
 	
 	public void showGameSettingView() {
 //		primaryStage.setScene(gameSettingView.getScene());
@@ -187,10 +161,15 @@ public class Controller {
 			model.rotatePlayer();
 			return false;
 		}
-		//TODO Extra View*Gratulation*Restart*Zur�ck zum Neu*
+		//TODO Extra View*Gratulation*Restart*Zurück zum Neu*
 		model.closeActualGame();
 		showStartView();
 		return true;
+	}
+
+	public void refreshActualSettingData() {
+		gameSettingView.refreshData();
+		audioSettingView.refreshData();
 	}
 	
 }

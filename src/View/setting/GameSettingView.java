@@ -6,15 +6,9 @@ import Model.AppConstants;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.Scene;
 import javafx.scene.SubScene;
-import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -32,7 +26,6 @@ public class GameSettingView {
 	private SubScene scene;
 	private RadioButton straightOut;
 	private RadioButton doubleOut;
-	private Button btnBack;
 	private ToggleGroup scoreInput;
 	private RadioButton inputDirect;
 	private RadioButton inputDartSeperated;
@@ -50,11 +43,6 @@ public class GameSettingView {
 	private void buildLayout() {
 		mainPane = new GridPane();
 		mainPane.setAlignment(Pos.CENTER);
-		
-		btnBack = new Button("<- Back");
-		GridPane.setHalignment(btnBack, HPos.CENTER);
-		GridPane.setValignment(btnBack, VPos.CENTER);
-		GridPane.setMargin(btnBack, new Insets(10));
 		
 		game301 = new RadioButton("301");
 		game501 = new RadioButton("501");
@@ -121,7 +109,9 @@ public class GameSettingView {
 				
 			}	
 		});
-		
+
+		refreshData();
+
 		VBox input = new VBox();
 		input.getChildren().addAll(inputDirect, inputDartSeperated, inputOpenCV);
 		GridPane.setMargin(input, new Insets(10));
@@ -133,8 +123,7 @@ public class GameSettingView {
 		VBox points = new VBox();
 		points.getChildren().addAll(game301, game501);
 		GridPane.setMargin(points, new Insets(10));
-		
-		mainPane.add(btnBack, 0, 1);
+
 		mainPane.add(points, 0, 0);
 		mainPane.add(out, 1, 0);
 		mainPane.add(input, 2, 0);
@@ -144,8 +133,24 @@ public class GameSettingView {
 	public SubScene getScene() {
 		return scene;
 	}
-	
-	public void addBackListener(EventHandler<ActionEvent> e) {
-		btnBack.setOnAction(e);
+
+	public void refreshData() {
+		Model.ScoreInputType inputType = model.getScoreInputType();
+		if (inputType == null)
+			return;
+		if (inputType.equals(Model.ScoreInputType.DIRECT)){
+			inputDirect.selectedProperty().set(true);
+			inputDirect.requestFocus();
+		} else if (inputType.equals(Model.ScoreInputType.DARTSEPERATED)) {
+			inputDartSeperated.setSelected(true);
+			inputDartSeperated.requestFocus();
+		} else if (inputType.equals(Model.ScoreInputType.OPENCV)) {
+			inputOpenCV.selectedProperty().set(true);
+			inputOpenCV.requestFocus();
+		} else {
+
+		}
 	}
+
+
 }

@@ -41,7 +41,7 @@ public class Model extends Observable {
 	private void createInitialConfig() {
 		gameType = 301;
 		finishType = 0;
-//		scoreInputType = ScoreInputType.DARTSEPERATED;
+		//scoreInputType = ScoreInputType.DARTSEPERATED;
 	}
 
 	public void addPlayer(Player player) {
@@ -70,13 +70,13 @@ public class Model extends Observable {
 	}
 	
 	/**
-	 * Prüft ob es aktive Spieler gibt Erstellt für jeden Spieler ein Spiel -> Game ist bereit
+	 * Prï¿½ft ob es aktive Spieler gibt Erstellt fï¿½r jeden Spieler ein Spiel -> Game ist bereit
 	 * @return true wenn Spieler aktiv sind
 	 * 			false wenn nicht
 	 */
 	public boolean startDartGame() {
-		//TODO: Meldung zurück geben dass ob man weiter spielen möchte oder nicht
-		//		Wenn ja false return. Wenn ja startDartGame Methode weiter führen
+		//TODO: Meldung zurï¿½ck geben dass ob man weiter spielen mï¿½chte oder nicht
+		//		Wenn ja false return. Wenn ja startDartGame Methode weiter fï¿½hren
 		if (activeGame != null)
 			return false;
 		
