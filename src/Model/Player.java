@@ -5,12 +5,20 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
+/**
+ * Repräntiert einen Spieler
+ */
 public class Player {
 
 	private String name;
 	private double average;
 	private BooleanProperty isActive;
-	
+
+    /**
+     * Konstruktor
+     * @param name
+     *          Name des Spielers
+     */
 	public Player(String name) {
 		this.name = name;
 		this.average = 0;
@@ -47,7 +55,10 @@ public class Player {
 	
 	@Override
 	public boolean equals(Object o) {
-		Player compare = (Player) o;
+	    if (o == null)
+	        return false;
+
+	    Player compare = (Player) o;
 		if (this.getName() == compare.getName())
 			return true;
 		return false;

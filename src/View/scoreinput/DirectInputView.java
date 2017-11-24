@@ -46,14 +46,14 @@ public class DirectInputView {
 			});
 			buttonList.add(button);
 		}
-		
+
 		Button delete = new Button("<");
 		delete.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
-				lbScore.setText(lbScore.getText().substring(0, lbScore.getText().length() - 1));
-			}
+            public void handle(ActionEvent arg0) {
+                lbScore.setText(lbScore.getText().substring(0, lbScore.getText().length() - 1));
+            }
 			
 		});
 		Button enter = new Button("Submit");

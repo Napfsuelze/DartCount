@@ -1,6 +1,5 @@
 package View;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -8,23 +7,20 @@ import java.util.Observer;
 import Controller.Controller;
 import Model.Game;
 import Model.Model;
-import Model.Player;
 import View.scoreinput.DartSeperatedInputView;
 import View.scoreinput.DirectInputView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+//TODO Bereits getätigte Eingabe korrigieren
 
 public class GameView implements Observer {
 	

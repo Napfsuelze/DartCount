@@ -12,6 +12,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
+/**
+ * Controller der Anwendung. Speichert die Stage, das Model und die Views.
+ * Bindet die Komponenten mit Listener
+ */
 public class Controller {
 	private Model model;
 	private MenuView menuView;
@@ -21,7 +25,12 @@ public class Controller {
 	private GameSettingView gameSettingView;
 	private AudioSettingView audioSettingView;
 	private GameView gameView;
-	
+
+    /**
+     * Konstruktor
+     * @param primaryStage
+     *          Stage der Anwendung
+     */
 	public Controller(Stage primaryStage) {
 		this.model = new Model();
 		this.menuView = new MenuView(model);
@@ -36,7 +45,10 @@ public class Controller {
 		
 		addListener();
 	}
-	
+
+    /**
+     * Setzt die Listener der Views um diese zu binden
+     */
 	private void addListener() {
 		menuView.setGameListener(new EventHandler<ActionEvent>() {
 
@@ -63,7 +75,6 @@ public class Controller {
 			@Override
 			public void handle(ActionEvent event) {
 				showSettingView();
-				System.out.println("Gedrückt");
 			}
 
 			
@@ -119,43 +130,54 @@ public class Controller {
 			
 		});
 	}
-	
+
+    /**
+     * Zeigt den Start/Menu View
+     */
 	public void showStartView() {
 		primaryStage.setScene(menuView.getScene());
 		primaryStage.setTitle("Count your Darts");
 	}
-	
+
+    /**
+     * Zeigt den Player View
+     */
 	public void showPlayerView() {
 		primaryStage.setScene(playerView.getScene());
 		primaryStage.setTitle("Count your Darts - Player");
 	}
-	
+
+    /**
+     * Zeigt den Setting View
+     */
 	public void showSettingView() {
 		primaryStage.setScene(settingView.getScene());
 		primaryStage.setTitle("Count your Darts - Setting");
 	}
-	
-	/*public void showSettingSelectionView() {
-		primaryStage.setScene(settingSelectionView.getScene());
-		primaryStage.setTitle("Count your Darts - Settings");
-	}*/
-	
-	public void showGameSettingView() {
-//		primaryStage.setScene(gameSettingView.getScene());
-		primaryStage.setTitle("Count your Darts - Game Settings");
-	}
-	
+
+    /**
+     * Zeigt den Game View
+     */
 	public void showGameView() {
 		primaryStage.setScene(gameView.getScene());
 		primaryStage.setTitle("Count your Darts - Game");
 	}
-	
+
+    /**
+     * Läd einen bestimmten Input View für den Game View
+     * @param type
+     *          Typ der Eingabe
+     */
 	public void loadScoreInputView(Model.ScoreInputType type) {
 		gameView.loadInputView(type);
 		model.setScoreInputType(type);
 		addListener();
 	}
 
+    /**
+     * Prüft ob ein Spiel beendet wurde und wechselt in den Start View
+     * @return
+     */
 	public boolean checkFinish() {
 		if (!model.isActiveGameisFinished()) {
 			model.rotatePlayer();
@@ -167,9 +189,12 @@ public class Controller {
 		return true;
 	}
 
+    /**
+     * Aktualisiert die Setting Einstellungen in den Views
+     */
 	public void refreshActualSettingData() {
-		gameSettingView.refreshData();
-		audioSettingView.refreshData();
+		gameSettingView.refreshSettingData();
+		audioSettingView.refreshSettingData();
 	}
 	
 }

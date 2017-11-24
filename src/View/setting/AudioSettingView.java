@@ -31,7 +31,7 @@ public class AudioSettingView {
 		return subScene;
 	}
 
-	public void refreshData() {
+	public void refreshSettingData() {
 
 	}
 }

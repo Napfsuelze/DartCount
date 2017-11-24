@@ -7,11 +7,13 @@ import java.util.Vector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Model der Anwendung. Speichert Spieler, aktive Spieler, Settings und die Spiele
+ */
 public class Model extends Observable {
 
 	private ObservableList<Player> playerList;
 	private List<Player> activePlayerList;
-	private int StageWidth, StageHeight;
 	
 	private int gameType;
 	private int finishType;
@@ -25,7 +27,10 @@ public class Model extends Observable {
 	
 	private ScoreInputType scoreInputType;
 	private int playerCount;
-	
+
+    /**
+     * Konstruktor
+     */
 	public Model() {
 		this.playerList = FXCollections.observableArrayList();
 		Player test = new Player("TestPlayer");
@@ -37,7 +42,10 @@ public class Model extends Observable {
 		games = new ArrayList<>();
 		createInitialConfig();
 	}
-	
+
+    /**
+     * Initialie Settings
+     */
 	private void createInitialConfig() {
 		gameType = 301;
 		finishType = 0;
@@ -65,25 +73,26 @@ public class Model extends Observable {
 	
 	public void removeActivePlayer(Player player) {
 		activePlayerList.remove(player);
+		System.out.println(player.toString());
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
 	/**
-	 * Pr�ft ob es aktive Spieler gibt Erstellt f�r jeden Spieler ein Spiel -> Game ist bereit
+	 * Prüft ob es aktive Spieler gibt Erstellt für jeden Spieler ein Spiel -> Game ist bereit
 	 * @return true wenn Spieler aktiv sind
 	 * 			false wenn nicht
 	 */
 	public boolean startDartGame() {
-		//TODO: Meldung zur�ck geben dass ob man weiter spielen m�chte oder nicht
-		//		Wenn ja false return. Wenn ja startDartGame Methode weiter f�hren
+		//TODO: Meldung zurück geben dass ob man weiter spielen möchte oder nicht
+		//		Wenn ja false return. Wenn ja startDartGame Methode weiter führen
 		if (activeGame != null)
 			return false;
 		
 		activePlayerList.clear();
 		for (int i = 0; i < playerList.size(); i++) {
 			if (playerList.get(i).isActive())
-				activePlayerList.add(playerList.get(i));
+			    addActivePlayer(playerList.get(i));
 		}
 		if (activePlayerList.isEmpty())
 			return false;
@@ -109,6 +118,12 @@ public class Model extends Observable {
 		this.notifyObservers(games);
 		
 	}
+
+	public int removeLastDart() {
+	    int lastScore = activeGame.removeLastDart();
+	    this.notifyObservers();
+	    return lastScore;
+    }
 	
 	public void addObserver(Observable o) {
 		this.addObserver(o);
@@ -121,15 +136,8 @@ public class Model extends Observable {
 	public List<Player> getActivePlayerList() {
 		return this.activePlayerList;
 	}
-	
-	public int getStageHeight() {
-		return this.StageHeight;
-	}
-	
-	public int getStageWidth() {
-		return this.StageWidth;
-	}
-	
+
+
 	public void setGameType(int i) {
 		gameType = i;
 	}

@@ -110,7 +110,7 @@ public class GameSettingView {
 			}	
 		});
 
-		refreshData();
+		refreshSettingData();
 
 		VBox input = new VBox();
 		input.getChildren().addAll(inputDirect, inputDartSeperated, inputOpenCV);
@@ -134,22 +134,41 @@ public class GameSettingView {
 		return scene;
 	}
 
-	public void refreshData() {
+	public void refreshSettingData() {
 		Model.ScoreInputType inputType = model.getScoreInputType();
-		if (inputType == null)
-			return;
-		if (inputType.equals(Model.ScoreInputType.DIRECT)){
-			inputDirect.selectedProperty().set(true);
-			inputDirect.requestFocus();
-		} else if (inputType.equals(Model.ScoreInputType.DARTSEPERATED)) {
-			inputDartSeperated.setSelected(true);
-			inputDartSeperated.requestFocus();
-		} else if (inputType.equals(Model.ScoreInputType.OPENCV)) {
-			inputOpenCV.selectedProperty().set(true);
-			inputOpenCV.requestFocus();
-		} else {
 
-		}
+		if (inputType != null) {
+            if (inputType.equals(Model.ScoreInputType.DIRECT)) {
+                inputDirect.selectedProperty().set(true);
+                inputDirect.requestFocus();
+            } else if (inputType.equals(Model.ScoreInputType.DARTSEPERATED)) {
+                inputDartSeperated.setSelected(true);
+                inputDartSeperated.requestFocus();
+            } else if (inputType.equals(Model.ScoreInputType.OPENCV)) {
+                inputOpenCV.selectedProperty().set(true);
+                inputOpenCV.requestFocus();
+            }
+        }
+
+		int finish = model.getGameType();
+
+		if (finish == 301) {
+		    game301.setSelected(true);
+		    game501.requestFocus();
+        } else if (finish == 501) {
+		    game501.setSelected(true);
+		    game501.requestFocus();
+        }
+
+        int out = model.getFinishType();
+
+		if (out == AppConstants.GAME_TYPE_STRAIGHT_OUT) {
+		    straightOut.setSelected(true);
+		    straightOut.requestFocus();
+        } else if (out == AppConstants.GAME_TYPE_DOUBLE_OUT) {
+		    doubleOut.setSelected(true);
+		    doubleOut.requestFocus();
+        }
 	}
 
 
