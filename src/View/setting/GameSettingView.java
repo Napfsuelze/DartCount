@@ -15,6 +15,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * View für die GameSettings
+ */
 public class GameSettingView {
 	
 	private Model model;
@@ -31,6 +34,13 @@ public class GameSettingView {
 	private RadioButton inputDartSeperated;
 	private RadioButton inputOpenCV;
 
+    /**
+     * Konstruktor
+     * @param model
+     *          Referenz zum Model
+     * @param controller
+     *          Referenz zum Controller
+     */
 	public GameSettingView(Model model, Controller controller) {
 		this.model = model;
 		this.controller = controller;
@@ -134,6 +144,10 @@ public class GameSettingView {
 		return scene;
 	}
 
+    /**
+     * Holt sich die aktuellen Settings vom Modell und passt die UI Komponenten dementsprechend an.
+     * Wird beim SubViewwechsel benötigt
+     */
 	public void refreshSettingData() {
 		Model.ScoreInputType inputType = model.getScoreInputType();
 
@@ -170,6 +184,4 @@ public class GameSettingView {
 		    doubleOut.requestFocus();
         }
 	}
-
-
 }

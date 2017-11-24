@@ -169,8 +169,8 @@ public class Controller {
      *          Typ der Eingabe
      */
 	public void loadScoreInputView(Model.ScoreInputType type) {
-		gameView.loadInputView(type);
-		model.setScoreInputType(type);
+        model.setScoreInputType(type);
+	    gameView.loadInputView();
 		addListener();
 	}
 

@@ -8,11 +8,19 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+/**
+ * View für AudioSettings
+ */
 public class AudioSettingView {
 	private Model model;
 	private Controller controller;
 	private SubScene subScene;
-	
+
+    /**
+     * Konstruktor
+     * @param model
+     * @param controller
+     */
 	public AudioSettingView(Model model, Controller controller) {
 		this.model = model;
 		this.controller = controller;

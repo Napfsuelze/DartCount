@@ -14,8 +14,8 @@ public class DartCountApllication extends Application {
 		
 		Controller controller = new Controller(primaryStage);
 		primaryStage.setTitle("Count your Darts");
-		primaryStage.setHeight(600);
-		primaryStage.setWidth(400);
+		primaryStage.setHeight(1080);
+		primaryStage.setWidth(1920);
 		controller.showStartView();
 		primaryStage.show();
 	}

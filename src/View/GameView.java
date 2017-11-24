@@ -22,6 +22,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 //TODO Bereits getätigte Eingabe korrigieren
 
+/**
+ * Game View der Anwendung. Beinhaltet als subScene einen InputView
+ */
 public class GameView implements Observer {
 	
 	private Model model;
@@ -32,12 +35,31 @@ public class GameView implements Observer {
 	private SubScene scoreInput;
 	private VBox scores;
 	private Button btnCloseGame;
-	
+
+    /**
+     * Konstruktor
+     * @param model
+     *          Referenz zum Model
+     * @param controller
+     *          Referenz zum Controller
+     */
 	public GameView(Model model, Controller controller) {
 		this.model = model;
 		this.controller = controller;
 		buildLayout();
 	}
+
+    /**
+     * Update Routine des Views
+     * @param arg0
+     * @param arg1
+     */
+    @Override
+    public void update(Observable arg0, Object arg1) {
+        if (arg1 instanceof List<?>) {
+            getActualModelData();
+        }
+    }
 	
 	private void buildLayout() {
 		mainPane = new BorderPane();
@@ -89,7 +111,7 @@ public class GameView implements Observer {
 		btnCloseGame.setOnAction(e);
 	}
 	
-	public void loadInputView(Model.ScoreInputType type) {
+	public void loadInputView() {
 		refreshScene();
 	}
 	
@@ -97,20 +119,10 @@ public class GameView implements Observer {
 		buildLayout();
 		getActualModelData();
 	}
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		if (arg1 instanceof List<?>) {
-			List<Game> list = (List<Game>) arg1;
-			scores.getChildren().clear();
-			for (int i = 0; i < list.size(); i++) {
-				Game game = list.get(i);
-				Label label = new Label(game.getPlayer().getName() + " " + game.getPoints());
-				scores.getChildren().add(label);
-			}
-			
-		}
-	}
-	
+
+    /**
+     *  Holt sich die aktuellen Spiel Daten
+     */
 	private void getActualModelData() {
 		List<Game> games = this.model.getGames();
 		scores.getChildren().clear();
@@ -120,5 +132,4 @@ public class GameView implements Observer {
 			scores.getChildren().add(label);
 		}
 	}
-
 }

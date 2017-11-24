@@ -14,13 +14,21 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * InputView zur Eingabe von summierten 3 Würfen (wird eh nicht benutzt)
+ */
 public class DirectInputView {
 	private Model model;
 	private Controller controller;
 	private SubScene scene;
 	private List<Button> buttonList;
 	private Label lbScore;
-	
+
+    /**
+     * Konstruktor
+     * @param model
+     * @param controller
+     */
 	public DirectInputView(Model model, Controller controller) {
 		this.model = model;
 		this.controller = controller;

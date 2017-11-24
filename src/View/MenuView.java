@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Repräsentiert das Menu
+ */
 public class MenuView {
 	
 	private Scene scene;
@@ -17,7 +20,11 @@ public class MenuView {
 	private Button btnPlayer;
 	private Button btnSetting;
 	private Model model;
-	
+
+    /**
+     * Konstruktor
+     * @param model
+     */
 	public MenuView(Model model) {
 		this.model = model;
 		buildLayout();
@@ -48,15 +55,6 @@ public class MenuView {
 		mainPane.setVgap(10);
 		
 		scene = new Scene(mainPane, 300, 300);
-	}
-	
-	
-	public Button getPlayerButton() {
-		return btnPlayer;
-	}
-	
-	public Button getStartButton() {
-		return btnStart;
 	}
 	
 	public void setPlayerListener(EventHandler<ActionEvent> e) {

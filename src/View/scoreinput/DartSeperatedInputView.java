@@ -15,7 +15,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-
+/**
+ * Input View zur Eingabe jedes einzelnen geworfenen Darts
+ */
 public class DartSeperatedInputView {
 	private Model model;
 	private Controller controller;
@@ -31,7 +33,14 @@ public class DartSeperatedInputView {
 	private Dart dart3;
 	private Dart activeDart;
 	private boolean dartCountend;
-	
+
+    /**
+     * Konstruktor
+     * @param model
+     *          Referenz zum Model
+     * @param controller
+     *          Referenz zum Controller
+     */
 	public DartSeperatedInputView(Model model, Controller controller){
 		this.model = model;
 		this.controller = controller;
