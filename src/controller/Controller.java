@@ -1,19 +1,19 @@
-package Controller;
+package controller;
 
-import Model.Model;
-import Model.Player;
-import View.setting.AudioSettingView;
-import View.setting.GameSettingView;
-import View.GameView;
-import View.MenuView;
-import View.PlayerView;
-import View.setting.SettingView;
+import model.Model;
+import model.Player;
+import view.setting.AudioSettingView;
+import view.setting.GameSettingView;
+import view.GameView;
+import view.MenuView;
+import view.PlayerView;
+import view.setting.SettingView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 /**
- * Controller der Anwendung. Speichert die Stage, das Model und die Views.
+ * controller der Anwendung. Speichert die Stage, das model und die Views.
  * Bindet die Komponenten mit Listener
  */
 public class Controller {
@@ -56,7 +56,7 @@ public class Controller {
 			public void handle(ActionEvent arg0) {
 				model.startDartGame();
 				showGameView();
-				//TODO: View anzeigen, dass Spieler aktiv sein m�ssen
+				//TODO: view anzeigen, dass Spieler aktiv sein m�ssen
 			}
 		});
 		
@@ -132,7 +132,7 @@ public class Controller {
 	}
 
     /**
-     * Zeigt den Start/Menu View
+     * Zeigt den Start/Menu view
      */
 	public void showStartView() {
 		primaryStage.setScene(menuView.getScene());
@@ -140,7 +140,7 @@ public class Controller {
 	}
 
     /**
-     * Zeigt den Player View
+     * Zeigt den Player view
      */
 	public void showPlayerView() {
 		primaryStage.setScene(playerView.getScene());
@@ -148,7 +148,7 @@ public class Controller {
 	}
 
     /**
-     * Zeigt den Setting View
+     * Zeigt den Setting view
      */
 	public void showSettingView() {
 		primaryStage.setScene(settingView.getScene());
@@ -156,7 +156,7 @@ public class Controller {
 	}
 
     /**
-     * Zeigt den Game View
+     * Zeigt den Game view
      */
 	public void showGameView() {
 		primaryStage.setScene(gameView.getScene());
@@ -164,7 +164,7 @@ public class Controller {
 	}
 
     /**
-     * Läd einen bestimmten Input View für den Game View
+     * Läd einen bestimmten Input view für den Game view
      * @param type
      *          Typ der Eingabe
      */
@@ -175,7 +175,7 @@ public class Controller {
 	}
 
     /**
-     * Prüft ob ein Spiel beendet wurde und wechselt in den Start View
+     * Prüft ob ein Spiel beendet wurde und wechselt in den Start view
      * @return
      */
 	public boolean checkFinish() {
@@ -183,7 +183,7 @@ public class Controller {
 			model.rotatePlayer();
 			return false;
 		}
-		//TODO Extra View*Gratulation*Restart*Zurück zum Neu*
+		//TODO Extra view*Gratulation*Restart*Zurück zum Neu*
 		model.closeActualGame();
 		showStartView();
 		return true;
