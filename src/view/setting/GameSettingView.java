@@ -1,8 +1,8 @@
-package View.setting;
+package view.setting;
 
-import Model.Model;
-import Controller.Controller;
-import Model.AppConstants;
+import model.Model;
+import controller.Controller;
+import model.AppConstants;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,7 +16,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 /**
- * View für die GameSettings
+ * view für die GameSettings
  */
 public class GameSettingView {
 	
@@ -37,9 +37,9 @@ public class GameSettingView {
     /**
      * Konstruktor
      * @param model
-     *          Referenz zum Model
+     *          Referenz zum model
      * @param controller
-     *          Referenz zum Controller
+     *          Referenz zum controller
      */
 	public GameSettingView(Model model, Controller controller) {
 		this.model = model;
@@ -137,12 +137,16 @@ public class GameSettingView {
 		mainPane.add(points, 0, 0);
 		mainPane.add(out, 1, 0);
 		mainPane.add(input, 2, 0);
-		scene = new SubScene(mainPane, 600, 400);
+		scene = new SubScene(mainPane, 500, 500);
 	}
 	
 	public SubScene getScene() {
 		return scene;
 	}
+
+	public GridPane getMainPane() {
+	    return mainPane;
+    }
 
     /**
      * Holt sich die aktuellen Settings vom Modell und passt die UI Komponenten dementsprechend an.

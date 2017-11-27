@@ -1,11 +1,11 @@
-package View.scoreinput;
+package view.scoreinput;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Controller.Controller;
-import Model.Dart;
-import Model.Model;
+import controller.Controller;
+import model.Dart;
+import model.Model;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,7 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
- * Input View zur Eingabe jedes einzelnen geworfenen Darts
+ * Input view zur Eingabe jedes einzelnen geworfenen Darts
  */
 public class DartSeperatedInputView {
 	private Model model;
@@ -37,9 +37,9 @@ public class DartSeperatedInputView {
     /**
      * Konstruktor
      * @param model
-     *          Referenz zum Model
+     *          Referenz zum model
      * @param controller
-     *          Referenz zum Controller
+     *          Referenz zum controller
      */
 	public DartSeperatedInputView(Model model, Controller controller){
 		this.model = model;

@@ -1,12 +1,11 @@
-package View.setting;
+package view.setting;
 
-import Controller.Controller;
-import Model.Model;
+import controller.Controller;
+import javafx.scene.layout.GridPane;
+import model.Model;
 import javafx.scene.SubScene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 
 /**
  * View für AudioSettings
@@ -15,6 +14,7 @@ public class AudioSettingView {
 	private Model model;
 	private Controller controller;
 	private SubScene subScene;
+	private GridPane mainPane;
 
     /**
      * Konstruktor
@@ -29,16 +29,19 @@ public class AudioSettingView {
 
 	private void buildLayout() {
 		Label label = new Label("Noch kein Audio am Start");
-		BorderPane pane = new BorderPane();
-		pane.setCenter(label);
+        mainPane = new GridPane();
+		mainPane.add(label, 0,0);
 		
-		subScene = new SubScene(pane, 500, 500);
+		subScene = new SubScene(mainPane, 500, 500);
 	}
 	
 	public SubScene getScene() {
 		return subScene;
 	}
 
+	public GridPane getMainPane() {
+	    return mainPane;
+    }
 	public void refreshSettingData() {
 
 	}

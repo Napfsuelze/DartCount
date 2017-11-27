@@ -1,14 +1,14 @@
-package View;
+package view;
 
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import Controller.Controller;
-import Model.Game;
-import Model.Model;
-import View.scoreinput.DartSeperatedInputView;
-import View.scoreinput.DirectInputView;
+import controller.Controller;
+import model.Game;
+import model.Model;
+import view.scoreinput.DartSeperatedInputView;
+import view.scoreinput.DirectInputView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -23,7 +23,7 @@ import javafx.scene.layout.VBox;
 //TODO Bereits getätigte Eingabe korrigieren
 
 /**
- * Game View der Anwendung. Beinhaltet als subScene einen InputView
+ * Game view der Anwendung. Beinhaltet als subScene einen InputView
  */
 public class GameView implements Observer {
 	
@@ -39,9 +39,9 @@ public class GameView implements Observer {
     /**
      * Konstruktor
      * @param model
-     *          Referenz zum Model
+     *          Referenz zum model
      * @param controller
-     *          Referenz zum Controller
+     *          Referenz zum controller
      */
 	public GameView(Model model, Controller controller) {
 		this.model = model;

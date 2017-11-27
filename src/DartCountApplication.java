@@ -3,6 +3,7 @@
 import controller.Controller;
 import javafx.application.*;
 import javafx.stage.Stage;
+import model.AppConstants;
 
 public class DartCountApplication extends Application {
 	
@@ -14,8 +15,8 @@ public class DartCountApplication extends Application {
 		
 		Controller controller = new Controller(primaryStage);
 		primaryStage.setTitle("Count your Darts");
-		primaryStage.setHeight(1080);
-		primaryStage.setWidth(1920);
+		primaryStage.setHeight(AppConstants.APP_HEIGHT);
+		primaryStage.setWidth(AppConstants.APP_WIDTH);
 		controller.showStartView();
 		primaryStage.show();
 	}

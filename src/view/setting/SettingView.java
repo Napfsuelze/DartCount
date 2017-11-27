@@ -1,7 +1,8 @@
-package View.setting;
+package view.setting;
 
-import Model.Model;
-import Controller.Controller;
+import model.AppConstants;
+import model.Model;
+import controller.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,19 +16,29 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
+/**
+ * View für das SettingView. Beinhaltet als SubScene die verschiedenen Settings
+ * TODO Back Button Realisation???
+ */
 public class SettingView {
 	
 	private Model model;
 	private Controller controller;
 	private Scene scene;
 	private GridPane mainPane;
-	private BorderPane pane;
 	private Button btnBack;
 	private SubScene subScene;
-	
+	private MenuBar menu;
+
+    /**
+     * Konstruktor
+     * @param model
+     *          Referenz zum Model
+     * @param controller
+     *          Referenz zum Controller
+     */
 	public SettingView(Model model, Controller controller) {
 		this.model = model;
 		this.controller =  controller;
@@ -38,9 +49,27 @@ public class SettingView {
 		//Pane__________________________
 		mainPane = new GridPane();
 		mainPane.setAlignment(Pos.CENTER);
+		mainPane.setGridLinesVisible(true);
 
-		pane = new BorderPane();
-		MenuBar menu = new MenuBar();
+
+        menu = new MenuBar();
+        GridPane.setFillWidth(menu, true);
+
+		Menu menuBack = new Menu("Back");
+
+        //CRAZY WORKAROUND
+        MenuItem backItem = new MenuItem();
+        menuBack.getItems().add(backItem);
+        menuBack.addEventHandler(Menu.ON_SHOWN, event -> menuBack.hide());
+        menuBack.addEventHandler(Menu.ON_SHOWING, event -> menuBack.fire());
+
+        menuBack.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.showStartView();
+            }
+        });
+
 		Menu menuGameSetting = new Menu("Game");
 
 		//CRAZY WORKAROUND
@@ -79,8 +108,7 @@ public class SettingView {
 		menuOpenCVSetting.addEventHandler(Menu.ON_SHOWN, event -> menuOpenCVSetting.hide());
 		menuOpenCVSetting.addEventHandler(Menu.ON_SHOWING, event -> menuOpenCVSetting.fire());
 
-		menu.getMenus().addAll(menuGameSetting, menuAudioSetting, menuOpenCVSetting);
-		pane.setTop(menu);
+		menu.getMenus().addAll(menuBack, menuGameSetting, menuAudioSetting, menuOpenCVSetting);
 				
 		//UI Komponenten________________
 		btnBack = new Button("<- Back");
@@ -89,16 +117,14 @@ public class SettingView {
 		GridPane.setMargin(btnBack, new Insets(10));
 		
 		//Scene_________________________
-		mainPane.add(btnBack, 0, 0);
-		mainPane.add(pane, 0, 1);
+        mainPane.add(menu, 0, 0);
+
+
 		if (subScene == null)
 			subScene = new GameSettingView(model, controller).getScene();
-		pane.setCenter(subScene);
+        mainPane.add(subScene, 0, 1);
 
-
-		scene = new Scene(mainPane, 300, 300);
-
-
+		scene = new Scene(mainPane);
 	}
 	
 	public Scene getScene() {
@@ -110,18 +136,20 @@ public class SettingView {
 	}
 
 	protected void showGameSettingView() {
-		pane.getChildren().remove(subScene);
+		mainPane.getChildren().remove(subScene);
 		GameSettingView view = new GameSettingView(model, controller);
 		subScene = view.getScene();
-		pane.setCenter(subScene);
+        //GridPane mainPane = view.getMainPane();
+        //subScene = new SubScene(mainPane, AppConstants.APP_WIDTH, AppConstants.APP_HEIGHT - menu.getHeight());
+        mainPane.add(subScene, 0, 1);
 		refreshActualSettingData();
 	}
 
 	protected void showAudioSettingView() {
-		pane.getChildren().remove(subScene);
+        mainPane.getChildren().remove(subScene);
 		AudioSettingView view = new AudioSettingView(model, controller);
 		subScene = view.getScene();
-		pane.setCenter(subScene);
+        mainPane.add(subScene, 0, 1);
 		refreshActualSettingData();
 	}
 

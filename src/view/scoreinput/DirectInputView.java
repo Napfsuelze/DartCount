@@ -1,11 +1,11 @@
-package View.scoreinput;
+package view.scoreinput;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Controller.Controller;
-import Model.Dart;
-import Model.Model;
+import controller.Controller;
+import model.Dart;
+import model.Model;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.SubScene;
