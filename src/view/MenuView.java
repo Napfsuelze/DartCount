@@ -1,5 +1,8 @@
 package view;
 
+import javafx.event.Event;
+import javafx.scene.control.TextField;
+import javafx.scene.input.*;
 import model.Model;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -32,29 +35,36 @@ public class MenuView {
 	
 
 	private void buildLayout() {
+
 		mainPane = new GridPane();
 		mainPane.setAlignment(Pos.CENTER);
+
 		
 		btnStart = new Button("Spiel starten");
-		btnStart.setPrefWidth(200);
+		btnStart.getStyleClass().add("button-navigate");
+
 		mainPane.add(btnStart, 0, 0);
 		GridPane.setHalignment(btnStart, HPos.CENTER);
 		
 		btnPlayer = new Button("Spieler");
-		btnPlayer.setPrefWidth(200);
+        btnPlayer.getStyleClass().add("button-navigate");
+
 		mainPane.add(btnPlayer, 0, 1);
 		GridPane.setHalignment(btnPlayer, HPos.CENTER);
 
-		
 		btnSetting = new Button("Einstellungen");
-		btnSetting.setPrefWidth(200);
+        btnSetting.getStyleClass().add("button-navigate");
+
 		mainPane.add(btnSetting, 0, 2);
 		GridPane.setHalignment(btnSetting, HPos.CENTER);
-		
+
+
 		mainPane.setHgap(10);
 		mainPane.setVgap(10);
-		
-		scene = new Scene(mainPane, 300, 300);
+
+		scene = new Scene(mainPane, 16*20, 9*20);
+        scene.getStylesheets().add(getClass().getResource("/styleclass.css").toString());
+
 	}
 	
 	public void setPlayerListener(EventHandler<ActionEvent> e) {
@@ -66,6 +76,7 @@ public class MenuView {
 	}
 	
 	public Scene getScene() {
+        mainPane.requestFocus();
 		return scene;
 	}
 

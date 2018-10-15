@@ -1,5 +1,8 @@
 package view;
 
+import javafx.application.Application;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import model.Model;
 import model.Player;
 import javafx.beans.value.ObservableValue;
@@ -25,7 +28,7 @@ public class PlayerView {
 	private GridPane mainPane;
 	private Model model;
 	private ListView<Player> playerView;
-	private TextField txtAdd;
+	private TextField txtAdad;
 	private Button btnRemove;
 	
 	public PlayerView(Model model) {
@@ -39,21 +42,41 @@ public class PlayerView {
 		mainPane.setAlignment(Pos.CENTER);
 		
 		//UI Komponenten________________
-		btnBack = new Button("<- Back");
-		GridPane.setHalignment(btnBack, HPos.LEFT);
-		GridPane.setValignment(btnBack, VPos.CENTER);
-		GridPane.setMargin(btnBack, new Insets(10));
-		
+        playerView = new ListView<>();
+        playerView.setMinSize(200, 100);
+        playerView.setCellFactory(CheckBoxListCell.forListView(new Callback<Player, ObservableValue<Boolean>>() {
+
+            @Override
+            public ObservableValue<Boolean> call(Player arg0) {
+                return arg0.onProperty();
+            }
+
+        }));
+
+
+        GridPane.setHalignment(playerView, HPos.CENTER);
+        GridPane.setValignment(playerView, VPos.CENTER);
+        GridPane.setMargin(playerView, new Insets(10));
+        GridPane.setColumnSpan(playerView, 2);
+        bindListView(model.getPlayerList());
+
+        txtAdad = new TextField("Name");
+        GridPane.setMargin(txtAdad, new Insets(10));
+        GridPane.setHalignment(txtAdad, HPos.CENTER);
+        GridPane.setValignment(txtAdad, VPos.CENTER);
+
 		btnAdd = new Button("Add Player");
+        btnAdd.getStyleClass().add("button-navigate");
 		GridPane.setHalignment(btnAdd, HPos.CENTER);
 		GridPane.setValignment(btnAdd, VPos.CENTER);
 		GridPane.setMargin(btnAdd, new Insets(10));
+
 		
 		btnRemove = new Button("Remove Selected Player");
+        btnRemove.getStyleClass().add("button-navigate");
 		GridPane.setHalignment(btnRemove, HPos.CENTER);
 		GridPane.setValignment(btnRemove, VPos.CENTER);
 		GridPane.setMargin(btnRemove, new Insets(10));
-		GridPane.setColumnSpan(btnRemove, 2);
 		
 		btnRemove.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -62,38 +85,38 @@ public class PlayerView {
 				model.removePlayer(playerView.getSelectionModel().getSelectedItem());
 			}
 		});
-		
-		playerView = new ListView<>();
-		playerView.setMinSize(200, 100);
-		playerView.setCellFactory(CheckBoxListCell.forListView(new Callback<Player, ObservableValue<Boolean>>() {
 
-			@Override
-			public ObservableValue<Boolean> call(Player arg0) {
-				return arg0.onProperty();
-			}
-			
-		}));
+        btnBack = new Button("Back");
+        btnBack.getStyleClass().add("button-navigate");
+		/*GridPane.setHalignment(btnBack, HPos.CENTER);
+		GridPane.setValignment(btnBack, VPos.CENTER);*/
+        GridPane.setMargin(btnBack, new Insets(10));
 
-		
-		GridPane.setHalignment(playerView, HPos.CENTER);
-		GridPane.setValignment(playerView, VPos.CENTER);
-		GridPane.setMargin(playerView, new Insets(10));
-		GridPane.setColumnSpan(playerView, 2);
-		bindListView(model.getPlayerList());
-		
-		txtAdd = new TextField("Name");
-		GridPane.setHalignment(txtAdd, HPos.CENTER);
-		GridPane.setValignment(txtAdd, VPos.CENTER);
-		GridPane.setMargin(txtAdd, new Insets(10));
-		
-		//Scene_________________________
-		mainPane.add(btnAdd, 1, 2);
-		mainPane.add(playerView, 0, 1);
-		mainPane.add(btnBack, 0, 0);
-		mainPane.add(txtAdd, 0, 2);
-		mainPane.add(btnRemove, 0, 3);
+        VBox buttonBox = new VBox(btnRemove, btnBack);
+        buttonBox.setPrefWidth(300);
+
+        btnRemove.setPrefWidth(buttonBox.getPrefWidth());
+        btnBack.setPrefWidth(buttonBox.getPrefWidth());
+
+		GridPane controlPane = new GridPane();
+        controlPane.add(txtAdad, 0, 0);
+        controlPane.add(btnAdd, 1, 0);
+        controlPane.add(buttonBox, 0, 1);
+        GridPane.setColumnSpan(buttonBox, 2);
+
+
+
+
+        //Scene_________________________
+        mainPane.add(playerView, 0, 0);
+        mainPane.add(controlPane, 0, 1);
+
+
+
 		
 		scene = new Scene(mainPane);
+        System.out.println(scene.getWidth());
+        scene.getStylesheets().add(getClass().getResource("/styleclass.css").toString());
 	}
 	
 	public Scene getScene() {
@@ -113,6 +136,6 @@ public class PlayerView {
 	}
 	
 	public String getAddPlayerName() {
-		return txtAdd.getText();
+		return txtAdad.getText();
 	}
 }

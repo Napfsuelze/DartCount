@@ -1,6 +1,9 @@
 package view.setting;
 
-import model.AppConstants;
+import constant.FontAwesomeConstants;
+import javafx.event.Event;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import model.Model;
 import controller.Controller;
 
@@ -12,10 +15,6 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -31,6 +30,7 @@ public class SettingView {
 	private Button btnBack;
 	private SubScene subScene;
 	private MenuBar menu;
+	private MenuButton menuBack;
 
     /**
      * Konstruktor
@@ -49,24 +49,64 @@ public class SettingView {
 		//Pane__________________________
 		mainPane = new GridPane();
 		mainPane.setAlignment(Pos.CENTER);
-		mainPane.setGridLinesVisible(true);
+		//mainPane.setGridLinesVisible(true);
+
+        GridPane navPane = new GridPane();
+
+        btnBack = new Button();
+        Label icon = new Label(FontAwesomeConstants.ICON_CIRCLE_ARROW_LEFT);
+        icon.getStyleClass().add("awesome-icon-button");
+        btnBack.setGraphic(icon);
+
+        Button btnGame = new Button("Game");
+        btnGame.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                showGameSettingView();
+            }
+        });
+
+        Button btnAudio = new Button("Audio");
+        btnAudio.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                showAudioSettingView();
+            }
+        });
+
+        Button btnOpenCV = new Button("OpenCV");
+
+        //---------TEST
+        btnOpenCV.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+
+            }
+        });
+        //--------------
+        btnOpenCV.setFocusTraversable(false);
+
+        navPane.addRow(0, btnBack, btnGame, btnAudio, btnOpenCV);
 
 
-        menu = new MenuBar();
+
+        /*menu = new MenuBar();
+        menu.getStyleClass().add("menu-bar-link");
         GridPane.setFillWidth(menu, true);
 
-		Menu menuBack = new Menu("Back");
+        menuBack = new MenuButton("Back");
 
         //CRAZY WORKAROUND
         MenuItem backItem = new MenuItem();
         menuBack.getItems().add(backItem);
-        menuBack.addEventHandler(Menu.ON_SHOWN, event -> menuBack.hide());
-        menuBack.addEventHandler(Menu.ON_SHOWING, event -> menuBack.fire());
+       *//* menuBack.addEventHandler(Menu.ON_SHOWN, event -> menuBack.hide());
+        menuBack.addEventHandler(Menu.ON_SHOWING, event -> menuBack.fire());*//*
+
 
         menuBack.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                controller.showStartView();
+                *//*controller.showStartView();*//*
             }
         });
 
@@ -100,24 +140,18 @@ public class SettingView {
 			}
 		});
 
-		Menu menuOpenCVSetting = new Menu("OpenCV");
+		Menu menuOpenCVSetting = new Menu("OpenCV");*/
 
 		//CRAZY WORKAROUND
-		MenuItem opencvItem = new MenuItem();
+		/*MenuItem opencvItem = new MenuItem();
 		menuOpenCVSetting.getItems().add(opencvItem);
 		menuOpenCVSetting.addEventHandler(Menu.ON_SHOWN, event -> menuOpenCVSetting.hide());
 		menuOpenCVSetting.addEventHandler(Menu.ON_SHOWING, event -> menuOpenCVSetting.fire());
 
-		menu.getMenus().addAll(menuBack, menuGameSetting, menuAudioSetting, menuOpenCVSetting);
-				
-		//UI Komponenten________________
-		btnBack = new Button("<- Back");
-		GridPane.setHalignment(btnBack, HPos.LEFT);
-		GridPane.setValignment(btnBack, VPos.CENTER);
-		GridPane.setMargin(btnBack, new Insets(10));
+		menu.getMenus().addAll(menuBack, menuGameSetting, menuAudioSetting, menuOpenCVSetting);*/
 		
 		//Scene_________________________
-        mainPane.add(menu, 0, 0);
+        mainPane.add(navPane, 0, 0);
 
 
 		if (subScene == null)
@@ -125,6 +159,7 @@ public class SettingView {
         mainPane.add(subScene, 0, 1);
 
 		scene = new Scene(mainPane);
+        scene.getStylesheets().add(getClass().getResource("/styleclass.css").toString());
 	}
 	
 	public Scene getScene() {

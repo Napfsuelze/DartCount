@@ -1,0 +1,142 @@
+.menu {
+    -fx-background-color: #1abc9c;
+    -fx-font-size: 12px;
+    -fx-padding: 3px 10px 3px 10px;
+    -fx-font-weight: 700;
+    -fx-border-color: #16a085;
+    /*-fx-border-width: 0px 1px 3px;
+    -fx-border-radius: 6px;*/
+}
+
+.menu:hover {
+    /*-fx-opacity: 0.80;*/
+}
+
+.menu:pressed {
+    -fx-padding: 3px 10px 3px 10px;
+    -fx-background-color: #16a085;
+    /*-fx-border-style: none solid solid solid;*/
+}
+
+.menu .label {
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    -fx-font-family: sans-serif;
+}
+
+.menu-bar {
+    -fx-background-color: white;
+    -fx-border-color: #16a085;
+    -fx-border-width: 0px 0px 1px;
+}
+
+.button-navigate{
+    -fx-font-size: 12px;
+    /*-fx-pref-width: 110px;      ___----------/// Die Buttongröße wird im Code gesetzt */
+    -fx-text-alignment: center;
+    -fx-padding: 3px 10px 3px 10px;
+    -fx-font-weight: 700;
+    -fx-background-color: #1abc9c;
+    -fx-border-color: #16a085;
+    -fx-border-width: 0px 1px 3px 1px;
+    -fx-border-radius: 6px;
+    -fx-text-fill: white;
+    -fx-font-family: sans-serif;
+}
+
+.button-navigate:hover{
+    -fx-opacity: 0.80;
+}
+
+.button-navigate:focused {
+    -fx-font-size: 12px;
+    /*
+    -fx-pref-width: 110px;
+    */
+    -fx-text-alignment: center;
+    -fx-padding: 3px 10px 3px 10px;
+    -fx-font-weight: 700;
+    -fx-background-color: #1abc9c;
+    -fx-border-color: #16a085;
+    -fx-border-width: 0px 1px 3px 1px;
+    -fx-border-radius: 6px;
+    -fx-text-fill: white;
+    -fx-font-family: sans-serif;
+}
+
+.button-navigate:pressed {
+    -fx-padding: 3px 10px 3px 10px;
+    -fx-border-style: none solid solid solid;
+}
+
+.list-view:focused {
+    -fx-focus-color: #16a085;
+}
+
+.list-cell:focused {
+    -fx-background-color: #16a085;
+}
+
+.text-field:focused {
+    -fx-focus-color: #16a085;
+}
+
+/*.button {
+    -fx-font-size: 12px;
+    -fx-pref-width: 110px;
+    -fx-text-alignment: center;
+    -fx-padding: 3px 10px 3px 10px;
+    -fx-font-weight: 700;
+    -fx-background-color: #1abc9c;
+    -fx-border-color: #16a085;
+    -fx-border-width: 0px 1px 3px 1px;
+    -fx-border-radius: 6px;
+    -fx-text-fill: white;
+    -fx-font-family: sans-serif;
+}
+
+.button:pressed {
+    -fx-font-size: 12px;
+    -fx-pref-width: 110px;
+    -fx-text-alignment: center;
+    -fx-padding: 3px 10px 3px 10px;
+    -fx-font-weight: 700;
+    -fx-background-color: #1abc9c;
+    -fx-border-color: #16a085;
+    -fx-border-width: 0px 1px 3px 1px;
+    -fx-border-radius: 6px;
+    -fx-text-fill: white;
+    -fx-font-family: sans-serif;
+}
+
+.button:focused {
+    -fx-font-size: 12px;
+    -fx-pref-width: 110px;
+    -fx-text-alignment: center;
+    -fx-padding: 3px 10px 3px 10px;
+    -fx-font-weight: 700;
+    -fx-background-color: #1abc9c;
+    -fx-border-color: #16a085;
+    -fx-border-width: 0px 1px 3px 1px;
+    -fx-border-radius: 6px;
+    -fx-text-fill: white;
+    -fx-font-family: sans-serif;
+}
+
+.button:hover {
+    -fx-opacity: 0.80;
+}
+*/
+
+.awesome-icon {
+    -fx-font-family: FontAwesome;
+    -fx-font-size: 28px;
+}
+
+.awesome-icon-button {
+    -fx-font-family: FontAwesome;
+    -fx-font-size: 16px;
+}
+
+
+

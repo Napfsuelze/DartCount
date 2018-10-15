@@ -2,7 +2,7 @@ package view.setting;
 
 import model.Model;
 import controller.Controller;
-import model.AppConstants;
+import constant.AppConstants;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

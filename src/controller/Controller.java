@@ -17,7 +17,8 @@ import javafx.stage.Stage;
  * Bindet die Komponenten mit Listener
  */
 public class Controller {
-	private Model model;
+
+    private Model model;
 	private MenuView menuView;
 	private PlayerView playerView;
 	private Stage primaryStage;
@@ -152,7 +153,7 @@ public class Controller {
      */
 	public void showSettingView() {
 		primaryStage.setScene(settingView.getScene());
-		primaryStage.setTitle("Count your Darts - Setting");
+		primaryStage.setTitle("Count your Darts - Settings");
 	}
 
     /**

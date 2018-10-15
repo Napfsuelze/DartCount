@@ -5,6 +5,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 import controller.Controller;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
+import javafx.scene.control.TextField;
 import model.Game;
 import model.Model;
 import view.scoreinput.DartSeperatedInputView;
@@ -17,9 +20,9 @@ import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 //TODO Bereits getätigte Eingabe korrigieren
 
 /**
@@ -29,7 +32,7 @@ public class GameView implements Observer {
 	
 	private Model model;
 	private Controller controller;
-	private BorderPane mainPane;
+	private GridPane mainPane;
 	private Scene scene;
 	private Button btnBack;
 	private SubScene scoreInput;
@@ -62,16 +65,18 @@ public class GameView implements Observer {
     }
 	
 	private void buildLayout() {
-		mainPane = new BorderPane();
+		mainPane = new GridPane();
+		GridPane inputPane = new GridPane();
 		
-		btnBack = new Button("<- Back");
+		btnBack = new Button("Back");
+        btnBack.getStyleClass().add("button-navigate");
 		btnCloseGame = new Button("Cancel Game");
+        btnCloseGame.getStyleClass().add("button-navigate");
 		
-		HBox topHBox = new HBox(btnBack, btnCloseGame);
+		HBox bottomHbox = new HBox(btnBack, btnCloseGame);
 		HBox.setMargin(btnBack, new Insets(10));
 		HBox.setMargin(btnCloseGame, new Insets(10));
-		BorderPane.setAlignment(topHBox, Pos.CENTER);
-		BorderPane.setMargin(topHBox, new Insets(10));
+
 		
 		//Score Input
 		//-------------------
@@ -84,23 +89,26 @@ public class GameView implements Observer {
 			DirectInputView inputView = new DirectInputView(model, controller);
 			scoreInput = inputView.getScene();
 		}
-		
+
+		inputPane.add(scoreInput, 0, 0);
+		GridPane.setHalignment(inputPane, HPos.CENTER);
+		GridPane.setValignment(inputPane, VPos.CENTER);
+
 		//Player and Scores
 		//------------------
 		scores = new VBox();
-		
-		
-		mainPane.setLeft(scores);
-		mainPane.setTop(topHBox);
-		mainPane.setCenter(scoreInput);
-		
-		
+
+		mainPane.add(scores, 0, 0);
+        mainPane.add(inputPane, 0,1);
+		mainPane.add(bottomHbox, 0, 2);
+
 		
 		scene = new Scene(mainPane);
+        scene.getStylesheets().add(getClass().getResource("/styleclass.css").toString());
 	}
 	
 	public Scene getScene() {
-		return scene;
+        return scene;
 	}
 	
 	public void addBackListener(EventHandler<ActionEvent> e) {

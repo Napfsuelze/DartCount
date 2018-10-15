@@ -54,8 +54,8 @@ public class DirectInputView {
 			});
 			buttonList.add(button);
 		}
-
-		Button delete = new Button("<");
+        //TODO Backspace Icon <x
+		Button delete = new Button("x");
 		delete.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -97,7 +97,7 @@ public class DirectInputView {
 		VBox keyboard = new VBox();
 		keyboard.getChildren().addAll(lbScore, upper, middle, lower, controll);
 		
-		scene = new SubScene(keyboard, 200, 300);
+		scene = new SubScene(keyboard, 100, 100);
 
 	}
 	
