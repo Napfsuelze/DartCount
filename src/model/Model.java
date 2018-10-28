@@ -27,6 +27,7 @@ public class Model extends Observable {
 	
 	private ScoreInputType scoreInputType;
 	private int playerCount;
+	private int highestOrder;
 
     /**
      * Konstruktor
@@ -34,7 +35,7 @@ public class Model extends Observable {
 	public Model() {
 		this.playerList = FXCollections.observableArrayList();
 		Player test = new Player("TestPlayer");
-		test.setActive(true);
+		//test.setActive(true);
 		playerList.add(test);
 		playerList.add(new Player("Niklas"));
 		playerList.add(new Player("Arne"));
@@ -72,50 +73,66 @@ public class Model extends Observable {
 	}
 	
 	public void removeActivePlayer(Player player) {
+
+		if (player == null)
+		{
+			return;
+		}
+
 		activePlayerList.remove(player);
-		System.out.println(player.toString());
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
 	/**
-	 * Prüft ob es aktive Spieler gibt Erstellt für jeden Spieler ein Spiel -> Game ist bereit
+	 * Prüft ob es aktive Spieler gibt Erstellt für jeden Spieler ein Spiel -> Game ist spielbereit
 	 * @return true wenn Spieler aktiv sind
 	 * 			false wenn nicht
 	 */
 	public boolean startDartGame() {
-		//TODO: Meldung zurück geben dass ob man weiter spielen möchte oder nicht
-		//		Wenn ja false return. Wenn ja startDartGame Methode weiter führen
-		if (activeGame != null)
-			return false;
-		
-		activePlayerList.clear();
+
+		/*activePlayerList.clear();
+
 		for (int i = 0; i < playerList.size(); i++) {
 			if (playerList.get(i).isActive())
-			    addActivePlayer(playerList.get(i));
+			{
+				addActivePlayer(playerList.get(i));
+			}
+		}*/
+
+		//DEBUG
+		for (Player player : this.activePlayerList)
+		{
+			System.out.println(player.getName() + " " + player.getOrder());
 		}
-		if (activePlayerList.isEmpty())
+
+		if (this.activePlayerList.isEmpty())
+		{
 			return false;
-		
-		for (int i = 0; i < activePlayerList.size(); i++) {
-			Game game = new Game(this.gameType, this.finishType, activePlayerList.get(i));
-			// TODO: Sortierung der Liste. (Reihenfolge beachten)
-			//---------------------------------------------------
-			if (i == 0)
-				activeGame = game;
-			games.add(game);
 		}
-		playerCount = games.size();
+
+		for (int i = 0; i < this.activePlayerList.size(); i++) {
+			Game game = new Game(this.gameType, this.finishType, this.activePlayerList.get(i));
+
+			if (i == 0)
+			{
+				this.activeGame = game;
+			}
+
+			this.games.add(game);
+		}
+
+		this.playerCount = this.games.size();
 		
-		this.setChanged();
-		this.notifyObservers(games);
+		setChanged();
+		notifyObservers(this.games);
 		return true;
 	}
 	
 	public void throwDart(Dart dart) {
-		activeGame.throwDart(dart);
-		this.setChanged();
-		this.notifyObservers(games);
+		this.activeGame.throwDart(dart);
+		setChanged();
+		notifyObservers(games);
 		
 	}
 
@@ -170,7 +187,7 @@ public class Model extends Observable {
 
 	public void closeActualGame() {
 		this.activeGame = null;
-		this.activePlayerList.clear();
+		//this.activePlayerList.clear();
 		this.games.clear();
 	}
 
@@ -180,8 +197,42 @@ public class Model extends Observable {
 
 	public void rotatePlayer() {
 		if (games.indexOf(activeGame) == playerCount - 1)
+		{
 			activeGame = games.get(0);
+		}
 		else
+		{
 			activeGame = games.get(games.indexOf(activeGame) + 1);
+		}
+	}
+
+	public Game getActiveGame()
+	{
+		return this.activeGame;
+	}
+
+	public void setHighestOrder(int order)
+	{
+		this.highestOrder = order;
+	}
+
+	public int getHighestOrder()
+	{
+		return this.highestOrder;
+	}
+
+	public void incrementHighestOrder()
+	{
+		this.highestOrder += 1;
+	}
+
+	public void decrementHighestOrder()
+	{
+		if (this.highestOrder == 0)
+		{
+			return;
+		}
+
+		this.highestOrder -= 1;
 	}
 }

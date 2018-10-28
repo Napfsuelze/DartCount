@@ -46,13 +46,13 @@ public class Game {
      * @param dart
      */
 	public void throwDart(Dart dart) {
-		if (throwCount == 3) {
+		if (this.throwCount == 3) {
 			nextRound();
 			return;
 		}
 		
-		thrownDarts.add(dart);
-		throwCount += 1;
+		this.thrownDarts.add(dart);
+		this.throwCount += 1;
 		
 		int score = dart.getTotalDartScore();
 		
@@ -70,7 +70,7 @@ public class Game {
 			boolean win = checkValidWin(dart.isDoub());
 			if (win)
 				endGame();
-			if(!win)
+			else
 				resetScore();
 		}
 	}
@@ -80,14 +80,14 @@ public class Game {
      * @return
      */
 	public int removeLastDart() {
-	    if (throwCount == 0)
+	    if (this.throwCount == 0)
 	        return 0;
-	    throwCount -= 1;
-	    Dart lastDart = thrownDarts.get(thrownDarts.size() - 1);
-	    removedDarts.add(lastDart);
+		this.throwCount -= 1;
+	    Dart lastDart = this.thrownDarts.get(this.thrownDarts.size() - 1);
+		this.removedDarts.add(lastDart);
 	    int lastScore = lastDart.getTotalDartScore();
 	    this.points =+ lastScore;
-	    thrownDarts.remove(lastDart);
+		this.thrownDarts.remove(lastDart);
 
 	    return lastScore;
     }
@@ -96,15 +96,15 @@ public class Game {
      * Setzt den Score zurück falss z.B. überworfen wurde
      */
 	private void resetScore() {
-		if (inputType == ScoreInputType.DARTSEPERATED) {
-			for (int i = 0; i < throwCount; i++) {
-				Dart dart = thrownDarts.get(thrownDarts.size() - 1);
+		if (this.inputType == ScoreInputType.DARTSEPERATED) {
+			for (int i = 0; i < this.throwCount; i++) {
+				Dart dart = this.thrownDarts.get(this.thrownDarts.size() - 1);
 				this.points = this.points + dart.getTotalDartScore();
 				System.out.println(dart.getTotalDartScore() + " zurückgesetzt");
 			}
-			throwCount = 0;
-		} else if(inputType == ScoreInputType.DIRECT) {
-			Dart dart = thrownDarts.get(thrownDarts.size() - 1);
+			this.throwCount = 0;
+		} else if(this.inputType == ScoreInputType.DIRECT) {
+			Dart dart = this.thrownDarts.get(this.thrownDarts.size() - 1);
 			this.points = this.points + dart.getTotalDartScore();
 		}
 	}
@@ -113,7 +113,7 @@ public class Game {
      * Es kann wieder 3 Mal geworfen werden, setzt das Spiel auf InActive
      */
 	private void nextRound() {
-		throwCount = 0;
+		this.throwCount = 0;
 		this.setActive(false);
 		//gameview BEscheid geben dass nächste dran ist. Active Flag?
 	}

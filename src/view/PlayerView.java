@@ -1,7 +1,5 @@
 package view;
 
-import javafx.application.Application;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import model.Model;
 import model.Player;
@@ -48,6 +46,9 @@ public class PlayerView {
 
             @Override
             public ObservableValue<Boolean> call(Player arg0) {
+				int highestOrder = PlayerView.this.model.getHighestOrder();
+				arg0.setOrder(highestOrder);
+
                 return arg0.onProperty();
             }
 
@@ -88,8 +89,6 @@ public class PlayerView {
 
         btnBack = new Button("Back");
         btnBack.getStyleClass().add("button-navigate");
-		/*GridPane.setHalignment(btnBack, HPos.CENTER);
-		GridPane.setValignment(btnBack, VPos.CENTER);*/
         GridPane.setMargin(btnBack, new Insets(10));
 
         VBox buttonBox = new VBox(btnRemove, btnBack);

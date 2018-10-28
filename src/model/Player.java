@@ -2,17 +2,16 @@ package model;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
 /**
- * Repräntiert einen Spieler
+ * Repräsentiert einen Spieler
  */
 public class Player {
 
 	private String name;
 	private double average;
 	private BooleanProperty isActive;
+	private int order;
 
     /**
      * Konstruktor
@@ -23,14 +22,6 @@ public class Player {
 		this.name = name;
 		this.average = 0;
 		this.isActive = new SimpleBooleanProperty();
-		this.onProperty().addListener(new ChangeListener<Boolean>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-				setActive(arg2);
-			}
-			
-		});
 	}
 	
 	public String getName() {
@@ -56,11 +47,26 @@ public class Player {
 	@Override
 	public boolean equals(Object o) {
 	    if (o == null)
-	        return false;
+		{
+			return false;
+		}
 
 	    Player compare = (Player) o;
 		if (this.getName() == compare.getName())
+		{
 			return true;
+		}
+
 		return false;
+	}
+
+	public void setOrder(int order)
+	{
+		this.order = order;
+	}
+
+	public int getOrder()
+	{
+		return this.order;
 	}
 }
